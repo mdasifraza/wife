@@ -1,269 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Beautiful Wife Arshi💜</title>
-
-<style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background: linear-gradient(to bottom, #f3e8ff, #ffffff);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        padding: 20px;
-        overflow: hidden;
-    }
-
-    .container {
-        background: white;
-        width: 100%;
-        max-width: 400px;
-        padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(167, 139, 250, 0.3);
-        text-align: center;
-        position: relative;
-        z-index: 2;
-    }
-
-    h1 {
-        color: #8b5cf6;
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-
-    .question {
-        font-size: 17px;
-        margin-bottom: 20px;
-        color: #444;
-    }
-
-    .btn {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 12px;
-        font-size: 15px;
-        cursor: pointer;
-        background-color: #e9d5ff;
-        color: #5b21b6;
-        transition: 0.3s;
-    }
-
-    .btn:hover {
-        background-color: #d8b4fe;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    .heart {
-        font-size: 60px;
-        animation: heartbeat 1s infinite;
-    }
-
-    @keyframes heartbeat {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-        100% { transform: scale(1); }
-    }
-
-    .final-message {
-        font-size: 16px;
-        color: #5b21b6;
-        margin-top: 15px;
-        line-height: 1.6;
-    }
-
-    .proposal-text {
-        font-size: 18px;
-        margin-top: 20px;
-        color: #6d28d9;
-        font-weight: bold;
-    }
-
-    .ring {
-        font-size: 50px;
-        animation: pop 1s ease forwards;
-    }
-
-    @keyframes pop {
-        from { transform: scale(0); }
-        to { transform: scale(1); }
-    }
-
-    canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        z-index: 1;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beautiful Wife Arshi💜</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="intimate-quiz">
 
-<audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<div class="floating-hearts" id="floatingHearts"></div>
+
+<audio id="bgMusic" loop volume="0.3">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
 </audio>
 
 <canvas id="confetti"></canvas>
 
 <div class="container">
-    <h1>Love Quiz for My Queen 👑💜</h1>
-
-    <div id="quiz">
-        <div class="question" id="question"></div>
-        <div id="answers"></div>
+    <!-- Main Menu -->
+    <div id="menu" class="">
+        <h1>Love Quiz 💕</h1>
+        <p class="subtitle">Choose your adventure...</p>
+        <div class="intro-buttons">
+            <button class="btn general" onclick="startGeneralQuiz()">📚 General Love Quiz</button>
+            <button class="btn intimate" onclick="startIntimateQuiz()">🔥 Intimate Quiz</button>
+        </div>
     </div>
 
-    <div id="proposal" class="hidden">
-        <div class="heart">💜</div>
-        <div class="final-message">
-            From the day you came into my life,<br>
-            everything became more beautiful.<br><br>
-            You are my peace, my happiness,<br>
-            and my greatest blessing.
+    <!-- General Quiz Section -->
+    <div id="generalQuizSection" class="hidden">
+        <h1>Love Quiz for My Queen 👑💜</h1>
+        <div id="generalQuiz">
+            <div class="question" id="generalQuestion"></div>
+            <div id="generalAnswers"></div>
         </div>
 
-        <div class="ring">💍</div>
+        <div id="generalProposal" class="hidden">
+            <div class="heart">💜</div>
+            <div class="final-message">
+                From the day you came into my life,<br>
+                everything became more beautiful.<br><br>
+                You are my peace, my happiness,<br>
+                and my greatest blessing.
+            </div>
 
-        <div class="proposal-text">
-            Will you continue this beautiful journey<br>
-            with me forever?
+            <div class="ring">💍</div>
+
+            <div class="proposal-text">
+                Will you continue this beautiful journey<br>
+                with me forever?
+            </div>
+
+            <button class="btn general" onclick="generalCelebrate()">YES, FOREVER 💖</button>
         </div>
 
-        <button class="btn" onclick="celebrate()">YES, FOREVER 💖</button>
+        <div id="generalCelebration" class="hidden">
+            <div class="heart">❤️</div>
+            <div class="final-message">
+                I promise to love you,<br>
+                protect you,<br>
+                respect you,<br>
+                and choose you every single day.<br><br>
+                Forever yours,<br>
+                Your Husband 💜
+            </div>
+            <button class="back-btn" onclick="goHome()">← Back to Menu</button>
+        </div>
     </div>
 
-    <div id="celebration" class="hidden">
-        <div class="heart">❤️</div>
-        <div class="final-message">
-            I promise to love you,<br>
-            protect you,<br>
-            respect you,<br>
-            and choose you every single day.<br><br>
-            Forever yours,<br>
-            Your Husband 💜
+    <!-- Intimate Quiz Section -->
+    <div id="intimateQuizSection" class="hidden">
+        <h1>Our Intimate Connection 🔥💕</h1>
+        <div id="intimateQuiz">
+            <div class="question" id="intimateQuestion"></div>
+            <div id="intimateAnswers"></div>
+        </div>
+
+        <div id="intimateResult" class="hidden">
+            <div class="heart">❤️</div>
+            <div class="final-message">
+                You know exactly what makes my heart<br>
+                (and other things) skip a beat...
+            </div>
+
+            <div class="naughty-message">
+                🌹 So tonight, let's make some memories... 🌹
+            </div>
+
+            <div class="final-message">
+                <br>I love you more with every passing day,<br>
+                and I can't wait to show you just how much.<br><br>
+                Ready to explore? 😏💋
+            </div>
+
+            <div class="ring">🛏️</div>
+
+            <button class="btn intimate" onclick="naughtyReward()">Take Me To Cloud Nine ☁️💕</button>
+        </div>
+
+        <div id="naughtyReward" class="hidden">
+            <div class="heart">🔥</div>
+            <div class="final-message">
+                You are my greatest fantasy,<br>
+                my deepest desire,<br>
+                and my wildest dream come true.<br><br>
+                Tonight is ALL about YOU. 💋<br><br>
+                Let me remind you why you married me... 😈
+            </div>
+
+            <div class="naughty-message">
+                Can't wait to taste your lips... 👅
+            </div>
+
+            <button class="back-btn" onclick="goHome()">← Back to Menu</button>
         </div>
     </div>
 </div>
 
-<script>
-const quizData = [
-    {
-        question: "Who loves the other more? 😌",
-        answers: ["Me!", "You!", "Both equally 💕"]
-    },
-    {
-        question: "What is our favorite time together? 💑",
-        answers: ["Late night talks 🌙", "Eating together 🍕", "Every moment 💜"]
-    },
-    {
-        question: "What are you to me?",
-        answers: ["Just wife", "My whole world 🌍", "My best friend & soulmate 💞"]
-    }
-];
-
-let currentQuestion = 0;
-
-const questionEl = document.getElementById("question");
-const answersEl = document.getElementById("answers");
-const quizEl = document.getElementById("quiz");
-const proposalEl = document.getElementById("proposal");
-const celebrationEl = document.getElementById("celebration");
-const music = document.getElementById("bgMusic");
-
-function loadQuestion() {
-    const current = quizData[currentQuestion];
-    questionEl.innerText = current.question;
-    answersEl.innerHTML = "";
-
-    current.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerText = answer;
-        button.classList.add("btn");
-        button.onclick = nextQuestion;
-        answersEl.appendChild(button);
-    });
-}
-
-function nextQuestion() {
-    if (currentQuestion === 0) {
-        music.play().catch(() => {});
-    }
-
-    currentQuestion++;
-    if (currentQuestion < quizData.length) {
-        loadQuestion();
-    } else {
-        quizEl.classList.add("hidden");
-        proposalEl.classList.remove("hidden");
-        startConfetti();
-    }
-}
-
-function celebrate() {
-    proposalEl.classList.add("hidden");
-    celebrationEl.classList.remove("hidden");
-}
-
-loadQuestion();
-
-/* Confetti */
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let confetti = [];
-
-for (let i = 0; i < 150; i++) {
-    confetti.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 6 + 2,
-        d: Math.random() * 50
-    });
-}
-
-function drawConfetti() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#c084fc";
-    ctx.beginPath();
-    for (let i = 0; i < confetti.length; i++) {
-        let c = confetti[i];
-        ctx.moveTo(c.x, c.y);
-        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, true);
-    }
-    ctx.fill();
-    updateConfetti();
-}
-
-function updateConfetti() {
-    for (let i = 0; i < confetti.length; i++) {
-        let c = confetti[i];
-        c.y += Math.cos(c.d) + 1;
-        if (c.y > canvas.height) {
-            c.y = 0;
-            c.x = Math.random() * canvas.width;
-        }
-    }
-}
-
-function startConfetti() {
-    setInterval(drawConfetti, 20);
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
+
